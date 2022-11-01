@@ -10,18 +10,19 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.wear.compose.material.MaterialTheme
+import androidx.wear.compose.material.ScalingLazyColumn
 import androidx.wear.compose.material.Text
+import androidx.wear.compose.material.rememberScalingLazyListState
 import com.example.delta.R
 import com.example.delta.presentation.theme.DeltaTheme
 
@@ -41,13 +42,27 @@ fun WearApp(greetingName: String) {
          * version of LazyColumn for wear devices with some added features. For more information,
          * see d.android.com/wear/compose.
          */
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(MaterialTheme.colors.background),
-            verticalArrangement = Arrangement.Center
+        val listState = rememberScalingLazyListState()
+
+        val contentModifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = 8.dp)
+        val iconModifier = Modifier
+            .size(24.dp)
+            .wrapContentSize(align = Alignment.Center)
+
+        ScalingLazyColumn(
+            modifier = Modifier.fillMaxSize(),
+            contentPadding = PaddingValues(
+                top = 64.dp,
+                start = 8.dp,
+                end = 8.dp,
+                bottom = 32.dp
+            ),
+            verticalArrangement = Arrangement.Center,
+            state = listState
         ) {
-            Greeting(greetingName = greetingName)
+            item { ChipExample(contentModifier, iconModifier) }
         }
     }
 }
