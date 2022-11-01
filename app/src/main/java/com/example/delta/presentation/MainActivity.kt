@@ -62,19 +62,10 @@ fun WearApp(greetingName: String) {
             verticalArrangement = Arrangement.Center,
             state = listState
         ) {
-            item { ChipExample(contentModifier, iconModifier) }
+            item { SelfReportChip(contentModifier, iconModifier) }
+            item { SessionStartToggleButton(contentModifier) }
         }
     }
-}
-
-@Composable
-fun Greeting(greetingName: String) {
-    Text(
-        modifier = Modifier.fillMaxWidth(),
-        textAlign = TextAlign.Center,
-        color = MaterialTheme.colors.primary,
-        text = stringResource(R.string.hello_world, greetingName)
-    )
 }
 
 @Preview(device = Devices.WEAR_OS_SMALL_ROUND, showSystemUi = true)
