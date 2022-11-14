@@ -1,5 +1,6 @@
 package com.example.delta.presentation
 
+import android.util.Log
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.runtime.Composable
@@ -11,34 +12,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.wear.compose.material.*
-
-
-
-@Composable
-fun SessionStartToggleButton(
-    modifier: Modifier = Modifier
-//    iconModifier: Modifier = Modifier
-) {
-    var checked by remember { mutableStateOf(true) }
-    ToggleButton(
-        checked = checked,
-        onCheckedChange = { checked = it },
-         modifier = modifier,
-        enabled = true,
-    ) {
-        Text(
-                text = "I am about to  Smoke",
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis
-        )
-//        Icon(
-//            painter = painterResource(id = R.drawable.smoking),
-//            contentDescription = "smoking icon",
-//            modifier = iconModifier,
-//        )
-    }
-}
-
 
 @Composable
 fun SelfReportChip (
@@ -63,4 +36,36 @@ fun SelfReportChip (
             )
         },
     )
+}
+
+
+@Composable
+fun SessionStartToggleButton(
+    modifier: Modifier = Modifier,
+//    iconModifier: Modifier = Modifier
+    instance: MainActivity
+) {
+    var clicked by remember { mutableStateOf(true) }
+    ToggleButton(
+        checked = clicked,
+        onCheckedChange = {
+            Log.i("Components", "unchecked")
+            instance.onSmokeToggle(clicked)
+            clicked = !clicked
+            // todo update text
+                          },
+        modifier = modifier,
+        enabled = true,
+    ) {
+        Text(
+            text = "I am about to smoke",
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis
+        )
+//        Icon(
+//            painter = painterResource(id = R.drawable.smoking),
+//            contentDescription = "smoking icon",
+//            modifier = iconModifier,
+//        )
+    }
 }
