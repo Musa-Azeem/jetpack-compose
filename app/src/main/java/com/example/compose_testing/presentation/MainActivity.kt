@@ -30,6 +30,7 @@ import com.example.compose_testing.R
 import com.example.compose_testing.presentation.theme.ComposeTestingTheme
 
 class MainActivity : ComponentActivity(), SensorEventListener {
+    val mViewModel: MainViewModel = MainViewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -43,44 +44,34 @@ class MainActivity : ComponentActivity(), SensorEventListener {
             WearApp("Android")
         }
     }
-
-    override fun onSensorChanged(p0: SensorEvent?) {
-        TODO("Not yet implemented")
+    override fun onSensorChanged(p0: SensorEvent) {
+        mViewModel.updateSensorData(p0.values[0].toString())
+//        mViewModel.updateSensorData("10")
     }
 
     override fun onAccuracyChanged(p0: Sensor?, p1: Int) {
     }
-}
 
-@Composable
-fun WearApp(greetingName: String) {
-    var sensor by remember { mutableStateOf("Default") }
-    ComposeTestingTheme {
-        /* If you have enough items in your list, use [ScalingLazyColumn] which is an optimized
-         * version of LazyColumn for wear devices with some added features. For more information,
-         * see d.android.com/wear/compose.
-         */
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(MaterialTheme.colors.background),
-            verticalArrangement = Arrangement.Center
-        ) {
-            Text(
-                modifier = Modifier.fillMaxWidth(),
-                textAlign = TextAlign.Center,
-                text = sensor
-            )
+    @Composable
+    fun WearApp(greetingName: String) {
+//    var sensor by remember { mutableStateOf("Default") }
+        ComposeTestingTheme {
+            /* If you have enough items in your list, use [ScalingLazyColumn] which is an optimized
+             * version of LazyColumn for wear devices with some added features. For more information,
+             * see d.android.com/wear/compose.
+             */
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(MaterialTheme.colors.background),
+                verticalArrangement = Arrangement.Center
+            ) {
+                Text(
+                    modifier = Modifier.fillMaxWidth(),
+                    textAlign = TextAlign.Center,
+                    text = mViewModel.sensorData
+                )
+            }
         }
     }
-}
-
-@Composable
-fun Greeting(greetingName: String) {
-    Text(
-        modifier = Modifier.fillMaxWidth(),
-        textAlign = TextAlign.Center,
-        color = MaterialTheme.colors.primary,
-        text = stringResource(R.string.hello_world, greetingName)
-    )
 }

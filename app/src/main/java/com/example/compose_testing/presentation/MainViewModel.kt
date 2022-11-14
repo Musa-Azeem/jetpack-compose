@@ -6,6 +6,8 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 
 class MainViewModel : ViewModel() {
-    var sensorData by mutableStateOf("")
-
+    var sensorData by mutableStateOf("0")
+    fun updateSensorData(value: String){
+        sensorData = value
+    }
 }
