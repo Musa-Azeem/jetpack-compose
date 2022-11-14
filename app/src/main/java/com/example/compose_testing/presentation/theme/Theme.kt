@@ -1,10 +1,10 @@
-package com.example.delta.presentation.theme
+package com.example.compose_testing.presentation.theme
 
 import androidx.compose.runtime.Composable
 import androidx.wear.compose.material.MaterialTheme
 
 @Composable
-fun DeltaTheme(
+fun ComposeTestingTheme(
     content: @Composable () -> Unit
 ) {
     MaterialTheme(

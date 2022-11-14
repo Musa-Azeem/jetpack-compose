@@ -1,4 +1,4 @@
-package com.example.delta.presentation.theme
+package com.example.compose_testing.presentation.theme
 
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
